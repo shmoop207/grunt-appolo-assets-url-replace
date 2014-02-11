@@ -47,7 +47,7 @@ module.exports = function(grunt) {
     // Unit tests.
     nodeunit: {
       tests: ['test/*_test.js'],
-    },
+    }
 
   });
 
@@ -65,5 +65,4 @@ module.exports = function(grunt) {
 
   // By default, lint and run all tests.
   grunt.registerTask('default', ['jshint', 'test']);
-
 };

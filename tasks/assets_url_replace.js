@@ -9,7 +9,7 @@ module.exports = function(grunt) {
 
 //var imgRegex = /url\s?\(['"]?(.*?)(?=['"]?\))/gi;
 
-	var cssRegex = /url\s?\(['"]?(.*)(?=['"]?\))/gi;
+	var cssRegex = /url\s*\(\s*(['"]?)([^"'\)]*)\1\s*\)/gi;
 	var htmlRegex = /src\s?\=['"]?(.*)['"]/gi;
 
 
@@ -30,6 +30,7 @@ module.exports = function(grunt) {
 
    		 	if(ext == '.css') {
 
+   		 		 var modified = false;
 		   		 var css = fs.readFileSync(filepath).toString(),
 		   		 match;
 
@@ -39,29 +40,34 @@ module.exports = function(grunt) {
 
 		                if (imagePath.indexOf("http://") == -1 && imagePath.indexOf(";base64") == -1 && options.ext.indexOf(path.extname(imagePath)) > -1 ) {
 		                    css = css.replace(match[0], "url("+options.staticUrl + path.normalize('/'+ imagePath)+")");
+		                    modified = true;
 		                }
 		            }
 
-		         grunt.file.write(filepath, css);
-		         grunt.log.writeln('File "' + filepath + '" modified.');
+		         if(modified) {
+		         	grunt.file.write(filepath, css);
+		         	grunt.log.writeln('File "' + filepath + '" modified.');
+		     	 }
 
    		 	} else if(ext == '.html' || ext == '.htm') {
 
+   		 		var modified = false;
    		 		var html = fs.readFileSync(filepath).toString(),
 		   		 match;
 
 		   		 while(match = htmlRegex.exec(html)) {
 		   		 	var imagePath = match[1];
 
-		   		 	console.log(match[0]);
-
 		                if (imagePath.indexOf("http://") == -1 && imagePath.indexOf(";base64") == -1 && options.ext.indexOf(path.extname(imagePath)) > -1 ) {
 		                    html = html.replace(match[0], 'src="'+options.staticUrl + path.normalize('/'+ imagePath)+'"');
+		                    modified = true;
 		                }
 		   		 }
 
-		   		 grunt.file.write(filepath, html);
-		         grunt.log.writeln('File "' + filepath + '" modified.');
+		   		 if(modified) {
+		   		 	grunt.file.write(filepath, html);
+		         	grunt.log.writeln('File "' + filepath + '" modified.');
+		   		 }
    		 	}
 
 	    });
