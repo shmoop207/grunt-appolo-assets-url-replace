@@ -1,0 +1,50 @@
+{
+  "name": "grunt-appolo-assets-url-replace",
+  "description": "Grunt task to replace assets urls with absolute path",
+  "version": "0.0.1",
+  "author": {
+    "name": "Roman Svichar",
+    "email": "shmoop207@gmail.com",
+    "url": "https://github.com/shmoop207"
+  },
+  "contributors": [
+    {
+      "name": "Udi Talias",
+      "email": "udi.talias@gmail.com",
+      "url": "https://github.com/uditalias"
+    }
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/nanjingboy/grunt-css-url-replace.git"
+  },
+  "bugs": {
+    "url": "https://github.com/nanjingboy/grunt-css-url-replace/issues"
+  },
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "https://github.com/nanjingboy/grunt-css-url-replace/blob/master/LICENSE-MIT"
+    }
+  ],
+  "main": "Gruntfile.js",
+  "engines": {
+    "node": ">= 0.8.0"
+  },
+  "scripts": {
+    "test": "grunt test"
+  },
+  "devDependencies": {
+    "grunt-contrib-jshint": "~0.6.0",
+    "grunt-contrib-clean": "~0.4.0",
+    "grunt-contrib-nodeunit": "~0.2.0",
+    "grunt": "~0.4.1"
+  },
+  "peerDependencies": {
+    "grunt": "~0.4.1"
+  },
+  "keywords": [
+    "gruntplugin"
+  ],
+ 
+}
