@@ -36,9 +36,12 @@ module.exports = function(grunt) {
 
 		   		while (match = cssRegex.exec(css)) {
 
-		                var imagePath = match[1];
+		                var imagePath = match[2];
 
-		                if (imagePath.indexOf("http://") == -1 && imagePath.indexOf(";base64") == -1 && options.ext.indexOf(path.extname(imagePath)) > -1 ) {
+		                if (imagePath.indexOf("http://") == -1 &&
+		                	imagePath.indexOf("https://") == -1 &&
+		                	imagePath.indexOf(";base64") == -1 &&
+		                	options.ext.indexOf(path.extname(imagePath)) > -1 ) {
 		                    css = css.replace(match[0], "url("+options.staticUrl + path.normalize('/'+ imagePath)+")");
 		                    modified = true;
 		                }
@@ -58,7 +61,10 @@ module.exports = function(grunt) {
 		   		 while(match = htmlRegex.exec(html)) {
 		   		 	var imagePath = match[1];
 
-		                if (imagePath.indexOf("http://") == -1 && imagePath.indexOf(";base64") == -1 && options.ext.indexOf(path.extname(imagePath)) > -1 ) {
+		                if (imagePath.indexOf("http://") == -1 &&
+		                	imagePath.indexOf("https://") == -1 &&
+		                	imagePath.indexOf(";base64") == -1 &&
+		                	options.ext.indexOf(path.extname(imagePath)) > -1 ) {
 		                    html = html.replace(match[0], 'src="'+options.staticUrl + path.normalize('/'+ imagePath)+'"');
 		                    modified = true;
 		                }
