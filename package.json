@@ -1,7 +1,7 @@
 {
   "name": "grunt-appolo-assets-url-replace",
   "description": "Grunt task to replace assets urls with absolute path",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "author": {
     "name": "Roman Svichar",
     "email": "shmoop207@gmail.com",

@@ -13,7 +13,7 @@ module.exports = function(grunt) {
 	var htmlRegex = /src\s?\=['"]?(.*)['"]/gi;
 
 
-  grunt.registerMultiTask('assetsUrlReplace', 'Grunt task to replace css urls with absolute path', function() {
+  grunt.registerMultiTask('assetsurlreplace', 'Grunt task to replace assets urls with absolute path', function() {
    
   	
 
