@@ -55,7 +55,7 @@ module.exports = function(grunt) {
 		         	grunt.log.writeln('File "' + filepath + '" modified.');
 		     	 }
 
-   		 	} else if(ext == '.html' || ext == '.htm') {
+   		 	} else if(ext == '.html' || ext == '.htm' || ext == '.ejs' || ext == '.jade') {
 
    		 		var modified = false;
    		 		var html = fs.readFileSync(filepath).toString(),
