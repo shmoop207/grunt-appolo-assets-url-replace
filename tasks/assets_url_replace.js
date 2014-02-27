@@ -11,6 +11,9 @@ module.exports = function(grunt) {
 	var htmlRegexSrc = /src\s?\=['"]?(.*)['"]/gi;
 	var htmlRegexHref = /href\s?\=['"]?(.*)['"]/gi;
 
+	String.prototype.startsWith = function(pattern) {
+    	return this.lastIndexOf(pattern, 0) === 0;
+  	}
 
   grunt.registerMultiTask('assetsurlreplace', 'Grunt task to replace assets urls with absolute path', function() {
    
