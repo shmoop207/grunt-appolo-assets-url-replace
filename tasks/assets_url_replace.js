@@ -7,10 +7,9 @@ var fs = require('fs'),
 
 module.exports = function(grunt) {
 
-//var imgRegex = /url\s?\(['"]?(.*?)(?=['"]?\))/gi;
-
 	var cssRegex = /url\s*\(\s*(['"]?)([^"'\)]*)\1\s*\)/gi;
-	var htmlRegex = /src\s?\=['"]?(.*)['"]/gi;
+	var htmlRegexSrc = /src\s?\=['"]?(.*)['"]/gi;
+	var htmlRegexHref = /href\s?\=['"]?(.*)['"]/gi;
 
 
   grunt.registerMultiTask('assetsurlreplace', 'Grunt task to replace assets urls with absolute path', function() {
@@ -19,7 +18,7 @@ module.exports = function(grunt) {
 
     var options = this.options({
       staticUrl: 'public',
-      ext: ['.png', '.jpeg', '.jpg', '.gif']
+      ext: ['.png', '.jpeg', '.jpg', '.gif', '.js', '.css']
     });
 
     this.files.forEach(function(f) {
@@ -58,14 +57,26 @@ module.exports = function(grunt) {
    		 		var html = fs.readFileSync(filepath).toString(),
 		   		 match;
 
-		   		 while(match = htmlRegex.exec(html)) {
+		   		 while(match = htmlRegexSrc.exec(html)) {
 		   		 	var imagePath = match[1];
 
 		                if (imagePath.indexOf("http://") == -1 &&
 		                	imagePath.indexOf("https://") == -1 &&
 		                	imagePath.indexOf(";base64") == -1 &&
 		                	options.ext.indexOf(path.extname(imagePath)) > -1 ) {
-		                    html = html.replace(match[0], 'src="'+options.staticUrl + path.normalize('/'+ imagePath)+'"');
+		                    html = html.replace(match[0], 'src="'+ options.staticUrl + path.normalize('/'+ imagePath)+'"');
+		                    modified = true;
+		                }
+		   		 }
+
+		   		 while(match = htmlRegexHref.exec(html)) {
+		   		 	var imagePath = match[1];
+
+		                if (imagePath.indexOf("http://") == -1 &&
+		                	imagePath.indexOf("https://") == -1 &&
+		                	imagePath.indexOf(";base64") == -1 &&
+		                	options.ext.indexOf(path.extname(imagePath)) > -1 ) {
+		                    html = html.replace(match[0], 'href="'+ options.staticUrl + path.normalize('/'+ imagePath)+'"');
 		                    modified = true;
 		                }
 		   		 }
