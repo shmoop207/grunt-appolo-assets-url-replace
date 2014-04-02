@@ -68,7 +68,7 @@ module.exports = function(grunt) {
 		                	!imagePath.startsWith("https://") &&
 		                	!imagePath.startsWith("//") &&
 		                	imagePath.indexOf(";base64") == -1 &&
-		                	options.ext.indexOf(path.extname(imagePath)) > -1 ) {
+                            options.ext.indexOf(path.extname(imagePath.substr(0, imagePath.indexOf('?') > -1 ? imagePath.indexOf('?') : imagePath.length ))) > -1 ) {
 		                    html = html.replace(match[0], 'src="'+ options.staticUrl + path.normalize('/'+ imagePath)+'"');
 		                    modified = true;
 		                }
